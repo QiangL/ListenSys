@@ -1,0 +1,67 @@
+<!DOCTYPE html5>
+<html lang="zh-en">
+
+<head>
+	<title>修改信息</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container-fluid">
+
+	<div class="row" style="margin-top:70px;">
+		<form action="" method="POST" class="form-horizontal col-sm-8 col-sm-offset-2" role="form">
+			<div class="form-group">
+				<div class="col-sm-7 col-sm-offset-2">
+					<legend>修改信息</legend>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="userID" class="col-sm-3 control-label">用户名：</label>
+				<div class="col-sm-6">
+					<input type="text" name="userID" class="form-control" placeholder="" readonly/>
+					<span class="help-block">以上信息用于标识您的身份，不可更改</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="userName" class="col-sm-3 control-label">姓名</label>
+				<div class="col-sm-6">
+					<input type="text" name="userName" class="form-control" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-sm-3 control-label">邮箱地址：</label>
+				<div class="col-sm-6">
+					<input type="email" name="email" class="form-control" placeholder="" />
+				</div>
+			</div>
+			<!-- 增加上传头像的功能-->
+			<div class="form-group">
+				<label for="password" class="col-sm-3 control-label">密码：</label>
+				<div class="col-sm-6">
+					<input type="password" name="password" class="form-control" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="passwordComfir" class="col-sm-3 control-label">确认密码：</label>
+				<div class="col-sm-6">
+					<input type="passwordComfir" name="password" class="form-control" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-3 col-sm-offset-4">
+					<button type="submit" class="btn btn-large btn-warning btn-block">确认</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+	<!--import js of bootstrap and jQ must!-->
+	<script src="../jquery.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
