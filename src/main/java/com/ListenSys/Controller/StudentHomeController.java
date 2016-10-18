@@ -31,5 +31,9 @@ public class StudentHomeController {
 		req.setAttribute("student", student);
 		return "studentHome";
 	}
+	@RequestMapping(method=RequestMethod.POST)
+	public String test(){
+		return "html/stu_userCenter";
+	}
 
 }

@@ -11,19 +11,16 @@ import com.ListenSys.Entity.Student;
 import com.ListenSys.Entity.Teacher;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
 	@Autowired
 	TeacherDaoImpl teacherDaoImpl;
 	@Autowired
 	StudentDaoImpl studentDaoImpl;
 	
-	@RequestMapping(value="/teacher/login",method=RequestMethod.GET)
-	public String teacherLoginInti(){
-		return "teacherLogin";
-	}
-	@RequestMapping(value="/student/login",method=RequestMethod.GET)
-	public String studentLoginInit(){
-		return "studentLogin";
+	@RequestMapping(method=RequestMethod.GET)
+	public String LoginInit(){
+		return "common/login";
 	}
 	@RequestMapping(value="/teacher/login",method = RequestMethod.POST)
 	public String LoginCheck(Teacher t){

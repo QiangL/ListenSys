@@ -1,5 +1,8 @@
 package com.ListenSys.Controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,19 +20,18 @@ public class RegisterController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String registerInit(){
-		return "html/student/stu_regsiter.html";
+		return "student/stu_regsiter";
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public String registerCheck(Student s,ModelMap modelMap){
-		System.out.println(s);
+	public String registerCheck(Student s,String passwordComfir,ModelMap modelMap){
 		//TODO 数据验证 Model里放入错误信息
 		//do something
 		if(studentDaoImpl.addStudent(s)){
-			return "success";
+			return "redirect:login";
 		}else{
 			//TODO Model里放入错误信息
-			modelMap.put("error","");
-			return "redirect:register";
+			modelMap.put("error","注册失败");
+			return "redirect:regsiter";
 		}
 	}
 }
