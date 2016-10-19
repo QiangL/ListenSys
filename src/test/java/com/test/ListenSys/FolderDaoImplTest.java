@@ -13,8 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.ListenSys.Dao.Impl.FolderDaoImpl;
 import com.ListenSys.Entity.Folder;
 
-public class FolderDaoImplTest {
-	
+	public class FolderDaoImplTest{
 	private FolderDaoImpl testFolderDaoImpl;
 	private Folder folder;
 	

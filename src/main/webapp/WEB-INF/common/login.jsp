@@ -22,9 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="userID" class="col-sm-3 control-label">用户名：</label>
+				<label for="userId" class="col-sm-3 control-label">用户名：</label>
 				<div class="col-sm-6">
-					<input type="text" name="userID" class="form-control" placeholder=""/>
+					<input type="text" name="userId" class="form-control" placeholder=""/>
 				</div>
 			</div>
 			<div class="form-group">

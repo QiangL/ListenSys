@@ -28,35 +28,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="userID" class="col-sm-3 control-label">用户名：</label>
+				<label for="teacherId" class="col-sm-3 control-label">用户名：</label>
 				<div class="col-sm-6">
-					<input type="text" name="userID" class="form-control" placeholder="" readonly/>
+					<input type="text" name="teacherId" class="form-control" placeholder="" readonly/>
 					<span class="help-block">以上信息用于标识您的身份，不可更改</span>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="userName" class="col-sm-3 control-label">姓名</label>
+				<label for="teacherName" class="col-sm-3 control-label">姓名</label>
 				<div class="col-sm-6">
-					<input type="text" name="userName" class="form-control" placeholder="" />
+					<input type="text" name="teacherName" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="email" class="col-sm-3 control-label">邮箱地址：</label>
+				<label for="teacherEmail" class="col-sm-3 control-label">邮箱地址：</label>
 				<div class="col-sm-6">
-					<input type="email" name="email" class="form-control" placeholder="" />
+					<input type="email" name="teacherEmail" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<!-- 增加上传头像的功能-->
 			<div class="form-group">
-				<label for="password" class="col-sm-3 control-label">密码：</label>
+				<label for="teacherPwd" class="col-sm-3 control-label">原始密码：</label>
 				<div class="col-sm-6">
-					<input type="password" name="password" class="form-control" placeholder="" />
+					<input type="password" name="teacherPwd" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="passwordComfir" class="col-sm-3 control-label">确认密码：</label>
+				<label for="password2" class="col-sm-3 control-label">修改密码：</label>
 				<div class="col-sm-6">
-					<input type="passwordComfir" name="password" class="form-control" placeholder="" />
+					<input type="password" name="password2" class="form-control" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="passwordComfir" class="col-sm-3 control-label">确认修改密码：</label>
+				<div class="col-sm-6">
+					<input type="password" name="passwordComfir" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="form-group">

@@ -1,4 +1,4 @@
-package com.ListenSys.DBHelper;
+package com.ListenSys.util;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 public class BaseDBHelper {
 	/*
-	 * ÔÚÀàÂ·¾¶ÏÂÊ¹ÓÃÁËdatabase.properties£¬Í¬ÑùÅäÖÃÁËÒÔÏÂÊôĞÔ
+	 * ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½database.propertiesï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 */
 	private static String userName;

@@ -38,7 +38,6 @@ public class StudentDaoImpl implements StudentDao {
 				student.setStudentEmail(rs.getString("email"));
 				student.setStudentName(rs.getString("studentName"));
 				student.setStudentPwd(rs.getString("pwd"));
-				student.setTeacherId(rs.getInt("teacher_id"));
 			}
 		});
 		return student;
@@ -58,13 +57,11 @@ public class StudentDaoImpl implements StudentDao {
 				student.setStudentEmail(rs.getString("email"));
 				student.setStudentName(rs.getString("studentName"));
 				student.setStudentPwd(rs.getString("pwd"));
-				student.setTeacherId(rs.getInt("teacher_id"));
 			}
 		});
 		return student;
 	}
 	
-	@Override
 	public List<Student> getAllStudentsByTeacherId(final int teacherId) {
 		sql="select * from student where teacher_id=?";
 		List<Student> studentsList=jdbcTemplate.query(sql,new Object[]{teacherId},new int[]{Types.INTEGER},new RowMapper<Student>() {
@@ -78,7 +75,6 @@ public class StudentDaoImpl implements StudentDao {
 				student.setStudentEmail(rs.getString("email"));
 				student.setStudentName(rs.getString("studentName"));
 				student.setStudentPwd(rs.getString("pwd"));
-				student.setTeacherId(teacherId);
 				return student;
 			}
 		});
@@ -99,7 +95,6 @@ public class StudentDaoImpl implements StudentDao {
 				student.setStudentEmail(rs.getString("email"));
 				student.setStudentName(rs.getString("studentName"));
 				student.setStudentPwd(rs.getString("pwd"));
-				student.setTeacherId(rs.getInt("teacher_id"));
 				return student;
 			}
 		});
@@ -108,22 +103,20 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public boolean addStudent(Student student) {
-		sql="insert into student (classes_id,studentId,email,studentName,pwd,teacher_id) values(?,?,?,?,?,?)";
+		sql="insert into student (classes_id,studentId,email,studentName,pwd) values(?,?,?,?,?)";
 		Object[] args=new Object[]{
 				student.getClassesId(),
 				student.getStudentId(),
 				student.getStudentEmail(),
 				student.getStudentName(),
 				student.getStudentPwd(),
-				student.getTeacherId()
 		};
 		int[] argTypes=new int[]{
 				Types.INTEGER,
 				Types.VARCHAR,
 				Types.VARCHAR,
 				Types.VARCHAR,
-				Types.VARCHAR,
-				Types.INTEGER
+				Types.VARCHAR
 		};
 		return jdbcTemplate.update(sql,args,argTypes)==1?true:false;
 	}
@@ -136,14 +129,13 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public boolean updateStudent(Student student) {
-		sql="update student set classes_id=?,studentId=?,email=?,studentName=?,pwd=?,teacher_id=?   where student_id=?";
+		sql="update student set classes_id=?,studentId=?,email=?,studentName=?,pwd=? where student_id=?";
 		Object[] args=new Object[]{
 				student.getClassesId(),
 				student.getStudentId(),
 				student.getStudentEmail(),
 				student.getStudentName(),
 				student.getStudentPwd(),
-				student.getTeacherId(),
 				student.getId()
 		};
 		int[] argTypes=new int[]{
@@ -153,7 +145,6 @@ public class StudentDaoImpl implements StudentDao {
 				Types.VARCHAR,
 				Types.VARCHAR,
 				Types.INTEGER,
-				Types.INTEGER
 		};
 		return jdbcTemplate.update(sql,args,argTypes)==1?true:false;
 	}

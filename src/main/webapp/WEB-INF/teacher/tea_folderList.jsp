@@ -8,11 +8,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <head>
 	<title>录音列表</title>
+	<base href="<%=basePath%>">
 	<meta charset="UTF-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="container-fluid">
@@ -108,8 +109,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 	<!--import js of bootstrap and jQ must!-->
-	<script src="../js/jquery.js"></script>
-	<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

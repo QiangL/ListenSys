@@ -7,16 +7,14 @@ public class Student implements Comparable<Student> {
 	private String studentPwd;
 	private String studentEmail;
 	
-	private int teacherId;
 	private int classesId;
 	public Student(){}
-	public Student(int id,String studentId,String studentName,String studentPwd,String studentEmail,int teacherId,int classesId){
+	public Student(int id,String studentId,String studentName,String studentPwd,String studentEmail,int classesId){
 		this.id=id;
 		this.studentId=studentId;
 		this.studentName=studentName;
 		this.studentPwd=studentPwd;
 		this.studentEmail=studentEmail;
-		this.teacherId=teacherId;
 		this.classesId=classesId;
 	}
 	public int getId() {
@@ -48,12 +46,6 @@ public class Student implements Comparable<Student> {
 	}
 	public void setStudentEmail(String studentEmail) {
 		this.studentEmail = studentEmail;
-	}
-	public int getTeacherId() {
-		return teacherId;
-	}
-	public void setTeacherId(int teacherId) {
-		this.teacherId = teacherId;
 	}
 	public int getClassesId() {
 		return classesId;
@@ -92,7 +84,7 @@ public class Student implements Comparable<Student> {
 	public String toString() {
 		return "Student [id=" + id + ", studentId=" + studentId
 				+ ", studentName=" + studentName + ", studentPwd=" + studentPwd
-				+ ", studentEmail=" + studentEmail + ", teacherId=" + teacherId
+				+ ", studentEmail=" + studentEmail
 				+ ", classesId=" + classesId + "]";
 	}
 	

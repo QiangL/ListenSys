@@ -27,44 +27,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="userID" class="col-sm-3 control-label">用户名：</label>
+				<label for="studentId" class="col-sm-3 control-label">用户名：</label>
 				<div class="col-sm-6">
-					<input type="text" name="userID" class="form-control" placeholder="" readonly/>
+					<input type="text" name="studentId" class="form-control" placeholder="" readonly/>
 					<span class="help-block">以上信息用于标识您的身份，不可更改</span>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="userName" class="col-sm-3 control-label">姓名</label>
+				<label for="studentName" class="col-sm-3 control-label">姓名</label>
 				<div class="col-sm-6">
-					<input type="text" name="userName" class="form-control" placeholder="" />
+					<input type="text" name="studentName" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="email" class="col-sm-3 control-label">邮箱地址：</label>
+				<label for="studentEmail" class="col-sm-3 control-label">邮箱地址：</label>
 				<div class="col-sm-6">
-					<input type="email" name="email" class="form-control" placeholder="" />
+					<input type="email" name="studentEmail" class="form-control" placeholder="" />
 
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="userClass" class="col-sm-3 control-label">班级：</label>
+				<label for="classesId" class="col-sm-3 control-label">班级：</label>
 				<div class="col-sm-6">
-					<select class="form-control">
-						<option>test</option>
+					<select class="form-control" name="classesId">
+						<option value="0">test</option>
 					</select>
 				</div>
 			</div>
 			<!-- 增加上传头像的功能-->
 			<div class="form-group">
-				<label for="password" class="col-sm-3 control-label">密码：</label>
+				<label for="studentPwd" class="col-sm-3 control-label">原始密码：</label>
 				<div class="col-sm-6">
-					<input type="password" name="password" class="form-control" placeholder="" />
+					<input type="password" name="studentPwd" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="passwordComfir" class="col-sm-3 control-label">确认密码：</label>
+				<label for="password2" class="col-sm-3 control-label">修改密码：</label>
 				<div class="col-sm-6">
-					<input type="passwordComfir" name="password" class="form-control" placeholder="" />
+					<input type="password" name="password2" class="form-control" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="passwordComfir" class="col-sm-3 control-label">确认修改密码：</label>
+				<div class="col-sm-6">
+					<input type="password" name="passwordComfir" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="form-group">
