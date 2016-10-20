@@ -33,10 +33,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="location" class="control-label col-sm-3">选择上传文件夹：</label>
+				<label for="folder" class="control-label col-sm-3">选择上传文件夹：</label>
 				<div class="col-sm-5">
-					<select name="location" class="form-control">
-							<option value="test">test</option>
+					<select name="folder" class="form-control">
+							<option value="0">test</option>
 						</select>
 				</div>
 			</div>

@@ -2,6 +2,7 @@ package com.ListenSys.Controller;
 
 
 import java.security.GeneralSecurityException;
+
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ListenSys.Dao.Impl.StudentDaoImpl;
 import com.ListenSys.Entity.Student;
@@ -38,8 +40,8 @@ public class RegisterController {
 		return checkCode;
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public String registerCheck(Student s,String passwordComfir,ModelMap modelMap){
-		//TODO 数据验证 Model里放入错误信息
+	public String registerCheck(Student s,String passwordComfir,ModelMap modelMap,RedirectAttributes redirectAttributes){
+		//TODO 数据验证 Model里放入错误信息w
 		//do something
 		String idRegex="[0-9]{9}";
 		String emailRegex="^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{2,3}){1,3})$";
@@ -47,22 +49,22 @@ public class RegisterController {
 		boolean checkFlag=true;
 		if(s==null||passwordComfir==null){
 			checkFlag=false;
-			modelMap.put("error","请填写信息");
+			redirectAttributes.addFlashAttribute("error","请填写信息");
 		}else if(s.getStudentId().equals("")||!s.getStudentId().matches(idRegex)){//TODO 更精确地匹配ID
 			checkFlag=false;
-			modelMap.put("error","用户名不符合要求");
+			redirectAttributes.addFlashAttribute("error","用户名不符合要求");
 		}else if(s.getStudentName().equals("")){
 			checkFlag=false;
-			modelMap.put("error","请填写姓名");
+			redirectAttributes.addFlashAttribute("error","请填写姓名");
 		}else if(s.getStudentEmail().equals("")||!s.getStudentEmail().matches(emailRegex)){
 			checkFlag=false;
-			modelMap.put("error","邮箱格式不正确");
+			redirectAttributes.addFlashAttribute("error","邮箱格式不正确");
 		}else if(s.getStudentPwd().equals("")||!s.getStudentPwd().matches(passwordRegex)){
 			checkFlag=false;
-			modelMap.put("error","密码不符合格式不正确");
+			redirectAttributes.addFlashAttribute("error","密码不符合格式不正确");
 		}else if(!s.getStudentPwd().equals(passwordComfir)){
 			checkFlag=false;
-			modelMap.put("error","两次密码输入不一致");
+			redirectAttributes.addFlashAttribute("error","两次密码输入不一致");
 		}/*
 		else if(s.getClassesId()==0){
 			checkFlag=false;

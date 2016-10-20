@@ -27,13 +27,18 @@ public class TestStudentDaoImpl {
 
 	@Test
 	public void testGetStudnetById() {
-		Student s=testStudentDaoImpl.getStudentById(100);
-		System.out.println(s);
+		Student s=testStudentDaoImpl.getStudentById(2);
+		assertEquals(2, s.getId());
 	}
 
+	@Test
+	public void testGetAllStudentsByTeacherId() {
+		List<Student> studentsList=testStudentDaoImpl.getAllStudentsByTeacherId(1);
+		for(Student s:studentsList){
+		}
+	}
 
 	@Test
-	@Ignore
 	public void testGetAllStudentsByClassesId() {
 		List<Student> studentsList=testStudentDaoImpl.getAllStudentsByClassesId(1);
 		for(Student s:studentsList){
@@ -42,7 +47,6 @@ public class TestStudentDaoImpl {
 	}
 
 	@Test
-	@Ignore
 	public void testAddStudent() {
 		Student s=new Student();
 		s.setClassesId(2);
@@ -61,7 +65,6 @@ public class TestStudentDaoImpl {
 	}
 
 	@Test
-	@Ignore
 	public void testUpdateStudent() {
 		Student s=testStudentDaoImpl.getStudentById(2);
 		s.setStudentEmail("asdfasdf");

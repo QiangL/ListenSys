@@ -42,7 +42,7 @@ public class TestTeacherDaoImpl {
 		Teacher t=new Teacher();
 		t.setTeacherEmail("2112121");
 		t.setTeacherId("2121");
-		t.setTeacherName("aa");
+		t.setTeacherName("¿Ó«ø");
 		t.setTeacherPwd("asdf");
 		assertEquals(true, testTeacherDaoImpl.addTeacher(t));
 	}

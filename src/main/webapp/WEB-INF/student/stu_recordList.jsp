@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 	<%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,6 +20,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="container-fluid">
+
+<c:forEach items="${recordList }" var="tmp">
+      ${tmp.getId()}
+</c:forEach>
+
 	<!-- 文件夹display -->
 	<div class="panel panel-default">
 		<div class="panel-heading">

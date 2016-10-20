@@ -49,7 +49,7 @@ public class TeacherFolderListController {
 			return "redirect:/login";
 		}
 		if(teacher.getTeacherId().equals(teacherId)){
-			modelMap.put("teacher",teacher);
+			modelMap.put("teacher",teacher);//存放teacher,之后在jsp上显示
 			return "teacher/tea_userCenter";
 		}else{
 			modelMap.put("error","禁止访问");

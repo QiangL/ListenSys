@@ -86,7 +86,7 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public boolean addSound(Sound sound) {
-		sql="insert into sound (student_id,folder_id,points,comment,marked,path) values(?,?,?,?,0,?)";
+		sql="insert into sound (student_id,folder_id,points,comment,marked,path) values(?,?,?,?,0,?,)";
 		Object[] args=new Object[]{
 				sound.getStudentId(),
 				sound.getFolderId(),
@@ -112,7 +112,7 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public boolean updateSound(Sound sound) {
-		sql="update sound set student_id=?,folder_id=?,marked=?,comment=?,path=?,points=? where sound_id=?";
+		sql="update sound set student_id=?,folder_id=?,marked=?,comment=?,path=?,points=?  where sound_id=?";
 		Object[] args=new Object[]{
 				sound.getStudentId(),
 				sound.getFolderId(),
