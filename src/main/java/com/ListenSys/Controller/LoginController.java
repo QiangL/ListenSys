@@ -1,5 +1,7 @@
 package com.ListenSys.Controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,8 @@ public class LoginController {
 		return "common/login";
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String LoginCheck(String userId,String password,String roles,ModelMap modelMap,HttpSession session,RedirectAttributes redirectAttributes){
+	public String LoginCheck(String userId,String password,String roles,ModelMap modelMap,HttpSession session,
+			RedirectAttributes redirectAttributes,HttpServletResponse response){
 		//TODO Model里要放进去出错信息，重定向需要错误提示
 		StringBuilder sb=new StringBuilder();
 		if(roles.equals("student")){
@@ -40,7 +43,12 @@ public class LoginController {
 				sb.append("redirect:student/");
 				sb.append(student.getStudentId());
 				sb.append("/recordUpload");
+				session.removeAttribute("teacher");//移除以前的老师登陆记录，学生的会覆盖掉
 				session.setAttribute("student", student);
+				Cookie cookie=new Cookie("student", student.getId()+"");
+				cookie.setMaxAge(172800);
+				cookie.setPath("/");
+				response.addCookie(cookie);
 				return sb.toString();
 			}
 		}else if(roles.equals("teacher")){
@@ -53,6 +61,7 @@ public class LoginController {
 				sb.append("redirect:teacher/");
 				sb.append(teacher.getTeacherId());
 				sb.append("/folderList");
+				session.removeAttribute("student");
 				session.setAttribute("teacher", teacher);
 				return sb.toString();
 			}

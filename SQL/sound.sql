@@ -7,4 +7,4 @@ CREATE TABLE `sound` (
   `marked` int(11) DEFAULT '0',
   `path` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`sound_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

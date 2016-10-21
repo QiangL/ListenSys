@@ -18,8 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="container-fluid">
-
-
+<%@include file="tea_nav.jsp" %>
 	<div class="row" style="margin-top:70px;">
 		<form action="" method="POST" class="form-horizontal col-sm-8 col-sm-offset-2" role="form">
 			<div class="form-group">
@@ -30,39 +29,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 				<label for="teacherId" class="col-sm-3 control-label">用户名：</label>
 				<div class="col-sm-6">
-					<input type="text" name="teacherId" class="form-control" placeholder="" readonly/>
+					<input type="text" name="teacherId" class="form-control" value="${teacher.getTeacherId() }" readonly/>
 					<span class="help-block">以上信息用于标识您的身份，不可更改</span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="teacherName" class="col-sm-3 control-label">姓名</label>
 				<div class="col-sm-6">
-					<input type="text" name="teacherName" class="form-control" placeholder="" />
+					<input type="text" name="teacherName" class="form-control" value="${teacher.getTeacherName() }" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="teacherEmail" class="col-sm-3 control-label">邮箱地址：</label>
 				<div class="col-sm-6">
-					<input type="email" name="teacherEmail" class="form-control" placeholder="" />
+					<input type="email" name="teacherEmail" class="form-control" value="${teacher.getTeacherEmail() }"/>
 				</div>
 			</div>
 			<!-- 增加上传头像的功能-->
 			<div class="form-group">
 				<label for="teacherPwd" class="col-sm-3 control-label">原始密码：</label>
 				<div class="col-sm-6">
-					<input type="password" name="teacherPwd" class="form-control" placeholder="" />
+					<input type="password" name="teacherPwd" class="form-control" placeholder="每一次修改都需要填写原始密码哦" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="password2" class="col-sm-3 control-label">修改密码：</label>
 				<div class="col-sm-6">
-					<input type="password" name="password2" class="form-control" placeholder="" />
+					<input type="password" name="password2" class="form-control" placeholder="若无修改，无需填写；密码需以字母开头，6-18位，只能包含字符、数字和下划线" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="passwordComfir" class="col-sm-3 control-label">确认修改密码：</label>
 				<div class="col-sm-6">
-					<input type="password" name="passwordComfir" class="form-control" placeholder="" />
+					<input type="password" name="passwordComfir" class="form-control" placeholder="若无修改，无需填写；密码需以字母开头，6-18位，只能包含字符、数字和下划线" />
 				</div>
 			</div>
 			<div class="form-group">
