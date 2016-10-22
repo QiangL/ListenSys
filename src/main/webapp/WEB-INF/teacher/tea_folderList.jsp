@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body class="container-fluid">
+<%@include file="tea_nav.jsp" %>
 	<!--文件夹列表 -->
 	<!-- 希望变成侧边栏 -->
 	<div class="dropdown">

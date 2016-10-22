@@ -1,6 +1,5 @@
 package com.ListenSys.Controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,14 +14,15 @@ import com.ListenSys.Dao.Impl.StudentDaoImpl;
 import com.ListenSys.Entity.Student;
 
 @Controller
-@RequestMapping("/student/{studentId}")
+@RequestMapping("/student/{studentId}/information")
 public class StudentInformationController {
 	@Autowired
 	StudentDaoImpl studentDaoImpl;
 	
 	//修改信息的控制器
-	@RequestMapping(value="/information",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public String showInformation(@PathVariable String studentId,ModelMap modelMap,HttpSession session){
+		/*
 		Student student=(Student) session.getAttribute("student");
 		if(student==null){
 			modelMap.put("error","未登陆");
@@ -35,18 +35,24 @@ public class StudentInformationController {
 			modelMap.put("error","禁止访问");
 			return "redirect:/login";
 		}
+		*/
+		return "student/stu_userCenter";
 	}
-	@RequestMapping(value="/information",method=RequestMethod.POST)
-	public String checkInformation(@PathVariable String studentId,Student s,String password2,String passwordComfir,ModelMap modelMap,HttpSession session){
+	@RequestMapping(method=RequestMethod.POST)
+	public String checkInformation(@PathVariable String studentId,Student s,String password2,String passwordComfir,
+			ModelMap modelMap,HttpSession session){
 		Student student=(Student) session.getAttribute("student");
+		/*
 		if(student==null){
 			modelMap.put("error","未登陆");
 			return "redirect:/login";
 		}
+		
 		if(!student.getStudentId().equals(studentId)){
 			modelMap.put("error","禁止访问");
 			return "redirect:/login";
 		}
+		*/
 		if(!student.getStudentPwd().equals(s.getStudentPwd())){
 			modelMap.put("error","原始密码错误");
 			return "redirect:information";
@@ -55,10 +61,18 @@ public class StudentInformationController {
 			modelMap.put("error","两次更改的密码不一致");
 			return "redirect:information";
 		}
+		if(!password2.equals("")){//TODO验证密码格式
+			if(password2.matches("^[a-zA-Z]\\w{5,17}$")){
+				student.setStudentPwd(password2);
+			}else {
+				modelMap.put("error","新密码格式不正确");
+				return "redirect:information";
+			}
+			
+		}
 		student.setClassesId(s.getClassesId());
 		student.setStudentEmail(s.getStudentEmail());
 		student.setStudentName(s.getStudentName());
-		student.setStudentPwd(password2);
 		if(!studentDaoImpl.updateStudent(student)){
 			modelMap.put("error","修改失败");
 			return "redirect:information";

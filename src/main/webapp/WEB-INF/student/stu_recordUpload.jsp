@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-	<%
+<%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -19,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="container-fluid">
+<%@include file="stu_nav.jsp" %>
 	<!-- 录音文件上传区-->
 	<div style="margin-top:70px;">
 		<form action="" enctype="multipart/form-data" method="POST" class="form-horizontal col-sm-8 col-sm-offset-2" role="form">

@@ -43,7 +43,7 @@ public class FolderDaoImpl implements FolderDao {
 
 	@Override
 	public List<Folder> getAllFoldersByTeacherId(final int teacherId) {
-		sql = "select * from folder where teacher_id=?";
+		sql = "select * from folder where teacher_id=? order by folder_id desc";
 		List<Folder> foldersList =jdbcTemplate.query(sql,new Object[]{teacherId},new int[]{Types.INTEGER},new RowMapper<Folder>() {
 
 			@Override

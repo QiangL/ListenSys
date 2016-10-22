@@ -50,6 +50,11 @@ public class StudentRecordUploadController {
 			redirectAttributes.addFlashAttribute("error","上传文件不是音频文件");
 			return "redirect:recordUpload";
 		}
+		Folder folder=folderDaoImpl.getFolderById(Integer.valueOf(folderId));
+		if(folder.getFolderName()==null){
+			redirectAttributes.addFlashAttribute("error","所选文件夹无效");
+			return "redirect:recordUpload";
+		}
 		String path = request.getSession().getServletContext().getRealPath("/stu_record");
 		StringBuilder sb=new StringBuilder();
 		sb.append(student.getStudentId());
@@ -72,11 +77,6 @@ public class StudentRecordUploadController {
 		sound.setFolderId(Integer.valueOf(folderId));
 		sb.insert(0, "\\").insert(0, path);//更改了sb，增长前缀，为了储存时加入文件路径
 		sound.setPath(sb.toString());
-		Folder folder=folderDaoImpl.getFolderById(Integer.valueOf(folderId));
-		if(folder.getFolderName()==null){
-			redirectAttributes.addFlashAttribute("error","所选文件夹无效");
-			return "redirect:recordUpload";
-		}
 		if(!soundDaoImpl.addSound(sound)){
 			redirectAttributes.addFlashAttribute("error","服务器原因，文件上传失败");
 			return "redirect:recordUpload";

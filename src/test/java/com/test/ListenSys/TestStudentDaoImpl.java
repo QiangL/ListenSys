@@ -34,8 +34,8 @@ public class TestStudentDaoImpl {
 	@Test
 	public void testGetAllStudentsByTeacherId() {
 		List<Student> studentsList=testStudentDaoImpl.getAllStudentsByTeacherId(1);
-		for(Student s:studentsList){
-		}
+		/*for(Student s:studentsList){
+		}*/
 	}
 
 	@Test
