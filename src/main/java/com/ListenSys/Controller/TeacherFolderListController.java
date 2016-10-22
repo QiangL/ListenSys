@@ -23,22 +23,15 @@ public class TeacherFolderListController {
 	TeacherDaoImpl teacherDapImpl;
 	@Autowired
 	FolderDaoImpl folderDaoImpl;
-	
-	@RequestMapping(value="/folderList",method=RequestMethod.GET)
-	public String home(@PathVariable String teacherId,ModelMap modelMap,HttpSession session){
-		//TODO 拦截器 是否是登陆状态访问这个网页
-		Teacher teacher=(Teacher)session.getAttribute("teacher");
-		if(teacher==null){
-			modelMap.put("error","未登陆");
-			return "redirect:/login";
-		}
-		if(teacher.getTeacherId().equals(teacherId)){
-			List<Folder> folderList=folderDaoImpl.getAllFoldersByTeacherId(teacher.getId());
-			modelMap.put("folderList",folderList);
-			return "teacher/tea_folderList";
-		}else{
-			modelMap.put("error","禁止访问");
-			return "redirect:/login";
-		}
+
+	@RequestMapping(value = "/folderList", method = RequestMethod.GET)
+	public String home(@PathVariable String teacherId, ModelMap modelMap,
+			HttpSession session) {
+		// TODO 拦截器 是否是登陆状态访问这个网页
+		Teacher teacher = (Teacher) session.getAttribute("teacher");
+		List<Folder> folderList = folderDaoImpl
+				.getAllFoldersByTeacherId(teacher.getId());
+		modelMap.put("folderList", folderList);
+		return "teacher/tea_folderList";
 	}
 }

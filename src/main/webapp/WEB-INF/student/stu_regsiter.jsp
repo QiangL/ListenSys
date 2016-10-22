@@ -30,13 +30,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 				<label for="studentId" class="col-sm-3 control-label">用户名：</label>
 				<div class="col-sm-6">
-					<input type="text" name="studentId" class="form-control" placeholder="" />
+					<input type="text" name="studentId" class="form-control" placeholder="注册后不可更改，请填写正确" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="studentName" class="col-sm-3 control-label">姓名：</label>
 				<div class="col-sm-6">
-					<input type="text" name="studentName" class="form-control" placeholder="" />
+					<input type="text" name="studentName" class="form-control" placeholder="将会显示在导航栏" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 				<label for="studentEmail" class="col-sm-3 control-label">邮箱地址：</label>
 				<div class="col-sm-4">
-					<input type="email" name="studentEmail" class="form-control" placeholder="" />
+					<input type="email" name="studentEmail" class="form-control" placeholder="如果忘记密码的话需要使用该邮箱" />
 				</div>
 				<div class="col-sm-2">
 					<button type="button" class="btn btn-block btn-default">发送验证码</button>
@@ -68,13 +68,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 				<label for="studentPwd" class="col-sm-3 control-label">密码：</label>
 				<div class="col-sm-6">
-					<input type="password" name="studentPwd" class="form-control" placeholder="" />
+					<input type="password" name="studentPwd" class="form-control" placeholder="以字母开头，6-18位，只能包含字符、数字和下划线" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="passwordComfir" class="col-sm-3 control-label">确认密码：</label>
 				<div class="col-sm-6">
-					<input type="password" name="passwordComfir" class="form-control" placeholder="" />
+					<input type="password" name="passwordComfir" class="form-control" placeholder="以字母开头，6-18位，只能包含字符、数字和下划线" />
 				</div>
 			</div>
 			<!--

@@ -22,6 +22,7 @@ public class StudentInformationController {
 	//修改信息的控制器
 	@RequestMapping(method=RequestMethod.GET)
 	public String showInformation(@PathVariable String studentId,ModelMap modelMap,HttpSession session){
+		/*
 		Student student=(Student) session.getAttribute("student");
 		if(student==null){
 			modelMap.put("error","未登陆");
@@ -34,19 +35,24 @@ public class StudentInformationController {
 			modelMap.put("error","禁止访问");
 			return "redirect:/login";
 		}
+		*/
+		return "student/stu_userCenter";
 	}
 	@RequestMapping(method=RequestMethod.POST)
 	public String checkInformation(@PathVariable String studentId,Student s,String password2,String passwordComfir,
 			ModelMap modelMap,HttpSession session){
 		Student student=(Student) session.getAttribute("student");
+		/*
 		if(student==null){
 			modelMap.put("error","未登陆");
 			return "redirect:/login";
 		}
+		
 		if(!student.getStudentId().equals(studentId)){
 			modelMap.put("error","禁止访问");
 			return "redirect:/login";
 		}
+		*/
 		if(!student.getStudentPwd().equals(s.getStudentPwd())){
 			modelMap.put("error","原始密码错误");
 			return "redirect:information";

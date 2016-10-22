@@ -32,6 +32,7 @@ public class LoginController {
 	public String LoginCheck(String userId,String password,String roles,ModelMap modelMap,HttpSession session,
 			RedirectAttributes redirectAttributes,HttpServletResponse response){
 		//TODO Model里要放进去出错信息，重定向需要错误提示
+		
 		StringBuilder sb=new StringBuilder();
 		if(roles.equals("student")){
 			Student student=studentDaoImpl.getStudentByStudentId(userId);
@@ -45,6 +46,7 @@ public class LoginController {
 				sb.append("/recordUpload");
 				session.removeAttribute("teacher");//移除以前的老师登陆记录，学生的会覆盖掉
 				session.setAttribute("student", student);
+				session.setAttribute("roles", "student");
 				Cookie cookie=new Cookie("student", student.getId()+"");
 				cookie.setMaxAge(172800);
 				cookie.setPath("/");
@@ -63,6 +65,11 @@ public class LoginController {
 				sb.append("/folderList");
 				session.removeAttribute("student");
 				session.setAttribute("teacher", teacher);
+				session.setAttribute("roles", "teacher");
+				Cookie cookie=new Cookie("teacher", teacher.getId()+"");
+				cookie.setMaxAge(172800);
+				cookie.setPath("/");
+				response.addCookie(cookie);
 				return sb.toString();
 			}
 		}
