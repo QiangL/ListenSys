@@ -1,10 +1,19 @@
 package com.ListenSys.Entity;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class Student implements Comparable<Student> {
 	private int id;
+	@Size(min=9,message="用户名应为9位数字")//这里及以下全部为验证用，但是并没有真正使用
+	@Pattern(regexp="[0-9]{9}",message="用户名应为9位数字")
 	private String studentId;
+	@Size(min=1,message="名字至少长度为1")
 	private String  studentName;
+	@Size(min=6,max=18,message="密码最短6位，最长18位")
+	@Pattern(regexp="^[a-zA-Z]\\w{5,17}$",message="密码应以字母开头，长度在6~18之间，只能包含字符、数字和下划线")
 	private String studentPwd;
+	@Pattern(regexp="^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{2,3}){1,3})$",message="需填写有效邮箱")
 	private String studentEmail;
 	
 	private int classesId;

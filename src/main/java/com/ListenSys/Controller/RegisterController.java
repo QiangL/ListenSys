@@ -4,6 +4,7 @@ package com.ListenSys.Controller;
 import java.security.GeneralSecurityException;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,8 @@ public class RegisterController {
 		return checkCode;
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public String registerCheck(Student s,String passwordComfir,ModelMap modelMap,RedirectAttributes redirectAttributes){
+	public String registerCheck(@Valid Student s,String passwordComfir,ModelMap modelMap,
+			RedirectAttributes redirectAttributes){
 		//TODO 数据验证 Model里放入错误信息w
 		//do something
 		String idRegex="[0-9]{9}";
@@ -76,7 +78,7 @@ public class RegisterController {
 			if(studentDaoImpl.addStudent(s)){
 				return "redirect:login";
 			}else {
-				modelMap.put("error","注册失败");
+				redirectAttributes.addFlashAttribute("error","注册失败");
 				return "redirect:regsiter";
 			}
 		}else{

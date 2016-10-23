@@ -41,16 +41,18 @@ public class LoginController {
 			}else if(!student.getStudentPwd().equals(password)){
 				redirectAttributes.addFlashAttribute("error", "密码不正确");
 			}else{
-				sb.append("redirect:student/");
-				sb.append(student.getStudentId());
-				sb.append("/recordUpload");
 				session.removeAttribute("teacher");//移除以前的老师登陆记录，学生的会覆盖掉
 				session.setAttribute("student", student);
 				session.setAttribute("roles", "student");
-				Cookie cookie=new Cookie("student", student.getId()+"");
-				cookie.setMaxAge(172800);
-				cookie.setPath("/");
-				response.addCookie(cookie);
+				
+				Cookie studentCookie=new Cookie("student", student.getId()+"");
+				studentCookie.setMaxAge(172800);
+				studentCookie.setPath("/ListenSys/");
+				response.addCookie(studentCookie);
+				
+				sb.append("redirect:student/");
+				sb.append(student.getStudentId());
+				sb.append("/recordUpload");
 				return sb.toString();
 			}
 		}else if(roles.equals("teacher")){
@@ -60,16 +62,18 @@ public class LoginController {
 			}else if(!teacher.getTeacherPwd().equals(password)){
 				redirectAttributes.addFlashAttribute("error", "密码不正确");
 			}else{
-				sb.append("redirect:teacher/");
-				sb.append(teacher.getTeacherId());
-				sb.append("/folderList");
 				session.removeAttribute("student");
 				session.setAttribute("teacher", teacher);
 				session.setAttribute("roles", "teacher");
+				
 				Cookie cookie=new Cookie("teacher", teacher.getId()+"");
 				cookie.setMaxAge(172800);
-				cookie.setPath("/");
+				cookie.setPath("/ListenSys/");
 				response.addCookie(cookie);
+				
+				sb.append("redirect:teacher/");
+				sb.append(teacher.getTeacherId());
+				sb.append("/folderList");
 				return sb.toString();
 			}
 		}
