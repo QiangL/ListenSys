@@ -67,7 +67,7 @@ public class StudentRecordUploadController {
 		try {
 			record.transferTo(targetFile);
 		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
+			//TODO 加入日志
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error","服务器原因，文件上传失败");
 			return "redirect:recordUpload";

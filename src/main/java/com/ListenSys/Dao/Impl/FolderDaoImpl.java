@@ -13,7 +13,6 @@ import com.ListenSys.Dao.FolderDao;
 import com.ListenSys.Entity.Folder;
 
 public class FolderDaoImpl implements FolderDao {
-	private String sql;
 	private JdbcTemplate jdbcTemplate;
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -26,7 +25,7 @@ public class FolderDaoImpl implements FolderDao {
 
 	@Override
 	public Folder getFolderById(final int folderId) {
-		sql = "select * from folder where folder_id=?";
+		String sql = "select * from folder where folder_id=?";
 		final Folder folder = new Folder();
 		jdbcTemplate.query(sql, new Object[]{folderId}, new int[]{Types.INTEGER}, new RowCallbackHandler() {
 			
@@ -43,7 +42,7 @@ public class FolderDaoImpl implements FolderDao {
 
 	@Override
 	public List<Folder> getAllFoldersByTeacherId(final int teacherId) {
-		sql = "select * from folder where teacher_id=? order by folder_id desc";
+		String sql = "select * from folder where teacher_id=? order by folder_id desc";
 		List<Folder> foldersList =jdbcTemplate.query(sql,new Object[]{teacherId},new int[]{Types.INTEGER},new RowMapper<Folder>() {
 
 			@Override
@@ -61,7 +60,7 @@ public class FolderDaoImpl implements FolderDao {
 
 	@Override
 	public boolean addFolder(Folder folder) {
-		sql = "insert into folder (teacher_id,folderName,description) values(?,?,?)";
+		String sql = "insert into folder (teacher_id,folderName,description) values(?,?,?)";
 		Object[] args=new Object[]{
 				folder.getTeacherId(),
 				folder.getFolderName(),
@@ -77,13 +76,13 @@ public class FolderDaoImpl implements FolderDao {
 
 	@Override
 	public boolean delFolder(int folderId) {
-		sql = "delete from folder where folder_id=?";
+		String sql = "delete from folder where folder_id=?";
 		return jdbcTemplate.update(sql, new Object[]{folderId}, new int[]{Types.INTEGER})==1?true:false;
 	}
 
 	@Override
 	public boolean updateFolder(Folder folder) {
-		sql = "update folder set teacher_id=?,folderName=?,description=? where folder_id=?";
+		String sql = "update folder set teacher_id=?,folderName=?,description=? where folder_id=?";
 		Object[] args={
 				folder.getTeacherId(),
 				folder.getFolderName(),
@@ -98,5 +97,24 @@ public class FolderDaoImpl implements FolderDao {
 		};
 		return jdbcTemplate.update(sql, args, argTypes)==1?true:false;
 		
+	}
+
+	@Override
+	public List<Folder> getFoldersByStudentId(int studentId) {
+		// TODO Auto-generated method stub
+		String sql="select * from folder where folder_id in(select folder_id from sound where student_id=?)";
+		List<Folder> foldersList =jdbcTemplate.query(sql,new Object[]{studentId},new int[]{Types.INTEGER},new RowMapper<Folder>() {
+
+			@Override
+			public Folder mapRow(ResultSet rs, int index) throws SQLException {
+				Folder folder=new Folder();
+				folder.setId(rs.getInt("folder_id"));
+				folder.setTeacherId(rs.getInt("teacher_id"));
+				folder.setFolderName(rs.getString("folderName"));
+				folder.setDescription(rs.getString("description"));
+				return folder;
+			}
+		});
+		return foldersList;
 	}
 }

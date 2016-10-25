@@ -4,12 +4,14 @@ package com.ListenSys.Controller;
 import java.security.GeneralSecurityException;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ListenSys.Dao.Impl.StudentDaoImpl;
@@ -26,6 +28,7 @@ public class RegisterController {
 	public String registerInit(){
 		return "student/stu_regsiter";
 	}
+	@ResponseBody
 	@RequestMapping(value="/checkCode",method=RequestMethod.POST)
 	public Double sendCheckCode(String emailTo){
 		Double checkCode=Math.random()*899999+10000;
@@ -33,16 +36,15 @@ public class RegisterController {
 		try {
 			email.SendMail();
 		} catch (GeneralSecurityException | MessagingException e) {
-			// TODO Auto-generated catch block
+			// TODO 加入日志
 			e.printStackTrace();
 			return null;
 		}
 		return checkCode;
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public String registerCheck(Student s,String passwordComfir,ModelMap modelMap,RedirectAttributes redirectAttributes){
-		//TODO 数据验证 Model里放入错误信息w
-		//do something
+	public String registerCheck(@Valid Student s,String passwordComfir,ModelMap modelMap,
+			RedirectAttributes redirectAttributes){
 		String idRegex="[0-9]{9}";
 		String emailRegex="^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{2,3}){1,3})$";
 		String passwordRegex="^[a-zA-Z]\\w{5,17}$";//以字母开头，长度在6~18之间，只能包含字符、数字和下划线
@@ -76,7 +78,7 @@ public class RegisterController {
 			if(studentDaoImpl.addStudent(s)){
 				return "redirect:login";
 			}else {
-				modelMap.put("error","注册失败");
+				redirectAttributes.addFlashAttribute("error","注册失败");
 				return "redirect:regsiter";
 			}
 		}else{

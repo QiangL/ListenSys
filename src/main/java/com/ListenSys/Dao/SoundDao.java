@@ -12,4 +12,5 @@ public interface SoundDao {
 	public boolean addSound(Sound sound);
 	public boolean delSound(int soundId);
 	public boolean updateSound(Sound sound);
+	public List<Sound> getSoundsByFolderAndStudent(int folderId,int studentId);
 }

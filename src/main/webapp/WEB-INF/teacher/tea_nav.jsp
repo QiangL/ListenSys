@@ -21,9 +21,14 @@
 						<a href="teacher/${teacher.getTeacherId() }/information">修改信息</a>
 					</li>
 				</ul>
+				<!-- 
 				<div class="navbar-right">
 					<button class="btn btn-default btn-block navbar-btn">登出</button>
 				</div>
+				-->
+				<form class="navbar-form navbar-right" role="logout" action="logout" method="GET">
+					<button type="submit" class="btn btn-default">登出</button>
+				</form>
 			</div>
 		</div>
 	</nav>
