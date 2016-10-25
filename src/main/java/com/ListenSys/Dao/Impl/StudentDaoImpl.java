@@ -13,7 +13,6 @@ import com.ListenSys.Dao.StudentDao;
 import com.ListenSys.Entity.Student;
 
 public class StudentDaoImpl implements StudentDao {
-	private String sql;
 	private JdbcTemplate jdbcTemplate;
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -26,7 +25,7 @@ public class StudentDaoImpl implements StudentDao {
 	
 	@Override
 	public Student getStudentById(final int studentId) {
-		sql="select * from student where student_id=?";
+		String sql="select * from student where student_id=?";
 		final Student student=new Student();
 		jdbcTemplate.query(sql, new Object[]{studentId},new int[]{Types.INTEGER},new RowCallbackHandler() {
 			
@@ -45,7 +44,7 @@ public class StudentDaoImpl implements StudentDao {
 	
 	@Override
 	public Student getStudentByStudentId(final String studentId) {
-		sql="select * from student where studentId=?";
+		String sql="select * from student where studentId=?";
 		final Student student=new Student();
 		jdbcTemplate.query(sql, new Object[]{studentId},new int[]{Types.VARCHAR},new RowCallbackHandler() {
 			
@@ -63,7 +62,7 @@ public class StudentDaoImpl implements StudentDao {
 	}
 	
 	public List<Student> getAllStudentsByTeacherId(final int teacherId) {
-		sql="select * from student where teacher_id=?";
+		String sql="select * from student where teacher_id=?";
 		List<Student> studentsList=jdbcTemplate.query(sql,new Object[]{teacherId},new int[]{Types.INTEGER},new RowMapper<Student>() {
 
 			@Override
@@ -83,7 +82,7 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public List<Student> getAllStudentsByClassesId(final int classesId) {
-		sql="select * from student where classes_id=?";
+		String sql="select * from student where classes_id=?";
 		List<Student> studentsList=jdbcTemplate.query(sql,new Object[]{classesId},new int[]{Types.INTEGER},new RowMapper<Student>() {
 
 			@Override
@@ -103,7 +102,7 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public boolean addStudent(Student student) {
-		sql="insert into student (classes_id,studentId,email,studentName,pwd) values(?,?,?,?,?)";
+		String sql="insert into student (classes_id,studentId,email,studentName,pwd) values(?,?,?,?,?)";
 		Object[] args=new Object[]{
 				student.getClassesId(),
 				student.getStudentId(),
@@ -123,13 +122,13 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public boolean delStudent(int studentId) {
-		sql="delete from student where student_id=?";
+		String sql="delete from student where student_id=?";
 		return jdbcTemplate.update(sql, new Object[]{studentId}, new int[]{Types.INTEGER})==1?true:false;
 	}
 
 	@Override
 	public boolean updateStudent(Student student) {
-		sql="update student set classes_id=?,studentId=?,email=?,studentName=?,pwd=? where student_id=?";
+		String sql="update student set classes_id=?,studentId=?,email=?,studentName=?,pwd=? where student_id=?";
 		Object[] args=new Object[]{
 				student.getClassesId(),
 				student.getStudentId(),

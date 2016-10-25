@@ -31,8 +31,6 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String LoginCheck(String userId,String password,String roles,ModelMap modelMap,HttpSession session,
 			RedirectAttributes redirectAttributes,HttpServletResponse response){
-		//TODO Model里要放进去出错信息，重定向需要错误提示
-		
 		StringBuilder sb=new StringBuilder();
 		if(roles.equals("student")){
 			Student student=studentDaoImpl.getStudentByStudentId(userId);

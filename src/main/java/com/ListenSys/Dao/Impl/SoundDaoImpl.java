@@ -13,7 +13,6 @@ import com.ListenSys.Dao.SoundDao;
 import com.ListenSys.Entity.Sound;
 
 public class SoundDaoImpl implements SoundDao {
-	private String sql;
 	private JdbcTemplate jdbcTemplate;
 	
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -24,7 +23,7 @@ public class SoundDaoImpl implements SoundDao {
 	}
 	@Override
 	public Sound getSoundById(final int soundId) {
-		sql="select * from sound where sound_id=?";
+		String sql="select * from sound where sound_id=?";
 		final Sound sound = new Sound();
 		jdbcTemplate.query(sql,new Object[]{soundId},new int[]{Types.INTEGER},new RowCallbackHandler() {
 			
@@ -44,7 +43,7 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public List<Sound> getAllSoundsByStudentId(final int studentId) {
-		sql="select * from sound where student_id=?";
+		String sql="select * from sound where student_id=?";
 		List<Sound> soundsList=jdbcTemplate.query(sql,new Object[]{studentId},new int[]{Types.INTEGER},new RowMapper<Sound>() {
 
 			@Override
@@ -65,7 +64,7 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public List<Sound> getAllSoundsByFolderId(final int folderId) {
-		sql="select * from sound where folder_id=?";
+		String sql="select * from sound where folder_id=?";
 		List<Sound> soundsList=jdbcTemplate.query(sql,new Object[]{folderId},new int[]{Types.INTEGER},new RowMapper<Sound>() {
 
 			@Override
@@ -86,7 +85,7 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public boolean addSound(Sound sound) {
-		sql="insert into sound (student_id,folder_id,points,comment,marked,path) values(?,?,?,?,0,?,)";
+		String sql="insert into sound (student_id,folder_id,points,comment,marked,path) values(?,?,?,?,0,?,)";
 		Object[] args=new Object[]{
 				sound.getStudentId(),
 				sound.getFolderId(),
@@ -106,13 +105,13 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public boolean delSound(int soundId) {
-		sql="delete from sound where sound_id=?";
+		String sql="delete from sound where sound_id=?";
 		return jdbcTemplate.update(sql,new Object[]{soundId},new int[]{Types.INTEGER})==1?true:false;
 	}
 
 	@Override
 	public boolean updateSound(Sound sound) {
-		sql="update sound set student_id=?,folder_id=?,marked=?,comment=?,path=?,points=?  where sound_id=?";
+		String sql="update sound set student_id=?,folder_id=?,marked=?,comment=?,path=?,points=?  where sound_id=?";
 		Object[] args=new Object[]{
 				sound.getStudentId(),
 				sound.getFolderId(),
@@ -134,6 +133,28 @@ public class SoundDaoImpl implements SoundDao {
 		return jdbcTemplate.update(sql,args,argTypes)==1?true:false;
 		
 		
+	}
+	@Override
+	public List<Sound> getSoundsByFolderAndStudent(int folderId, int studentId) {
+		// TODO Auto-generated method stub
+		String sql="select * from sound where folder_id=? and student_id=?";
+		List<Sound> soundsList=jdbcTemplate.query(sql,new Object[]{folderId,studentId},
+				new int[]{Types.INTEGER,Types.INTEGER},new RowMapper<Sound>() {
+
+			@Override
+			public Sound mapRow(ResultSet rs, int index) throws SQLException {
+				Sound sound=new Sound();
+				sound.setId(rs.getInt("sound_id"));
+				sound.setFolderId(folderId);
+				sound.setStudentId(studentId);
+				sound.setPoints(rs.getInt("points"));
+				sound.setMarked(rs.getInt("marked")==1?true:false);
+				sound.setPath(rs.getString("path"));
+				sound.setComment(rs.getString("comment"));
+				return sound;
+			}
+		});
+		return soundsList;
 	}
 
 }

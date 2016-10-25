@@ -21,7 +21,6 @@ public class ClassesDaoImpl implements ClassesDao {
 		this.jdbcTemplate=jdbcTemplate;
 	}
 	
-	private String sql;
 	/* below is used for original jdbc*/
 	/*
 	private BaseDBHelper DBHelper;
@@ -34,7 +33,7 @@ public class ClassesDaoImpl implements ClassesDao {
 	}
 	@Override
 	public Classes getClassesById(final int classesId) {
-		sql="select * from classes where classes_id=?";
+		String sql="select * from classes where classes_id=?";
 		final Classes cls=new Classes();
 		jdbcTemplate.query(sql, new Object[]{classesId}, new int[]{Types.INTEGER} , new RowCallbackHandler(){
 
@@ -74,7 +73,7 @@ public class ClassesDaoImpl implements ClassesDao {
 
 	@Override
 	public List<Classes> getAllClassesByTeacherId(final int teacherId) {
-		sql="select * from classes where teacher_id=?";
+		String sql="select * from classes where teacher_id=?";
 		List<Classes> classesList=jdbcTemplate.query(sql, new Object[]{teacherId},new int[]{Types.INTEGER} , new RowMapper<Classes>(){
 
 			@Override
@@ -116,7 +115,7 @@ public class ClassesDaoImpl implements ClassesDao {
 
 	@Override
 	public boolean addClasses(Classes classes) {
-		sql="insert into classes (classesId,teacher_id,classesName) values(?,?,?)";
+		String sql="insert into classes (classesId,teacher_id,classesName) values(?,?,?)";
 		Object[] args=new Object[]{
 				classes.getClassId(),
 				classes.getTeacherId(),
@@ -152,7 +151,7 @@ public class ClassesDaoImpl implements ClassesDao {
 
 	@Override
 	public boolean delClasses(final int classesId) {
-		sql="delete from classes where classes_id=?";
+		String sql="delete from classes where classes_id=?";
 		return jdbcTemplate.update(sql, new PreparedStatementSetter(){
 
 			@Override
@@ -179,7 +178,7 @@ public class ClassesDaoImpl implements ClassesDao {
 
 	@Override
 	public boolean updateClasses(Classes classes) {
-		sql="update classes set classesId=?,teacher_id=?,classesName=? where classes_id=?";
+		String sql="update classes set classesId=?,teacher_id=?,classesName=? where classes_id=?";
 		Object [] args={
 				classes.getClassId(),
 				classes.getTeacherId(),
@@ -216,9 +215,8 @@ public class ClassesDaoImpl implements ClassesDao {
 	}
 	@Override
 	public List<Classes> getAllClassesByYear(String year) {
-		// TODO Auto-generated method stub
-		sql="select * from classes where classesId like '?%'";
-		List<Classes> classesList=jdbcTemplate.query(sql, new Object[]{year},new int[]{Types.VARCHAR} , new RowMapper<Classes>(){
+		String sql="select * from classes where classesId like ?";
+		List<Classes> classesList=jdbcTemplate.query(sql,new Object[]{year+"%"},new int[]{Types.VARCHAR}, new RowMapper<Classes>(){
 
 			@Override
 			public Classes mapRow(ResultSet rs, int index) throws SQLException {
@@ -232,6 +230,24 @@ public class ClassesDaoImpl implements ClassesDao {
 			
 		});
 		return classesList;
+	}
+
+	@Override
+	public Classes getClassesByClassesId(String classesId) {
+		String sql="select * from classes where classesId=?";
+		final Classes cls=new Classes();
+		jdbcTemplate.query(sql, new Object[]{classesId}, new int[]{Types.VARCHAR} , new RowCallbackHandler(){
+
+			@Override
+			public void processRow(ResultSet rs) throws SQLException {
+				cls.setId(rs.getInt("classes_id"));
+				cls.setClassId(classesId);
+				cls.setClassName(rs.getString("classesName"));
+				cls.setTeacherId(rs.getInt("teacher_id"));
+			}
+			
+		});
+		return cls;
 	}
 
 }

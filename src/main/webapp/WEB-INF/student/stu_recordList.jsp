@@ -21,8 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body class="container-fluid">
 
-<c:forEach items="${recordList }" var="tmp">
-      ${tmp.getId()}
+<c:forEach items="${recordMap}" var="tmp">
 </c:forEach>
 
 <%@include file="stu_nav.jsp" %>

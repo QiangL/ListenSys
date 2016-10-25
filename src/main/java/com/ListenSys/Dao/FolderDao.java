@@ -10,4 +10,5 @@ public interface FolderDao {
 	public boolean addFolder(Folder folder);
 	public boolean delFolder(int folderId);
 	public boolean updateFolder(Folder folder);
+	public List<Folder> getFoldersByStudentId(int studentId);
 }

@@ -13,7 +13,6 @@ import com.ListenSys.Dao.TeacherDao;
 import com.ListenSys.Entity.Teacher;
 
 public class TeacherDaoImpl implements TeacherDao {
-	private String sql;
 	private JdbcTemplate jdbcTemplate;
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -24,7 +23,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 	@Override
 	public Teacher getTeacherById(final int teacherId) {
-		sql="select * from teacher where teacher_id=?";
+		String sql="select * from teacher where teacher_id=?";
 		final Teacher teacher=new Teacher();
 		jdbcTemplate.query(sql,new Object[]{teacherId},new int[]{Types.INTEGER},new RowCallbackHandler() {
 			
@@ -43,7 +42,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	
 	@Override
 	public Teacher getTeacherByTeacherId(final String teacherId) {
-		sql="select * from teacher where teacherId=?";
+		String sql="select * from teacher where teacherId=?";
 		final Teacher teacher=new Teacher();
 		jdbcTemplate.query(sql,new Object[]{teacherId},new int[]{Types.VARCHAR},new RowCallbackHandler() {
 			
@@ -62,7 +61,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	
 	@Override
 	public List<Teacher> getAllTeacher() {
-		sql="select * from teacher";
+		String sql="select * from teacher";
 		List<Teacher> teachersList=jdbcTemplate.query(sql, new RowMapper<Teacher>(){
 
 			@Override
@@ -82,7 +81,7 @@ public class TeacherDaoImpl implements TeacherDao {
 
 	@Override
 	public boolean addTeacher(Teacher teacher) {
-		sql="insert into teacher (email,teacherId,teacherName,pwd) values(?,?,?,?)";
+		String sql="insert into teacher (email,teacherId,teacherName,pwd) values(?,?,?,?)";
 		Object[] args=new Object[]{
 				teacher.getTeacherEmail(),
 				teacher.getTeacherId(),
@@ -101,13 +100,13 @@ public class TeacherDaoImpl implements TeacherDao {
 
 	@Override
 	public boolean delTeacher(int teacherId) {
-		sql="delete from teacher where teacher_id=?";
+		String sql="delete from teacher where teacher_id=?";
 		return jdbcTemplate.update(sql,new Object[]{teacherId},new int[]{Types.INTEGER})==1?true:false;
 	}
 
 	@Override
 	public boolean updateTeacher(Teacher teacher) {
-		sql="update teacher set email=?,teacherId=?,teacherName=?,pwd=? where teacher_id=?";
+		String sql="update teacher set email=?,teacherId=?,teacherName=?,pwd=? where teacher_id=?";
 		Object[] args=new Object[]{
 				teacher.getTeacherEmail(),
 				teacher.getTeacherId(),
