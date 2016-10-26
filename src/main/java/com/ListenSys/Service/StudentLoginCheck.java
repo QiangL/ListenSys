@@ -56,6 +56,7 @@ public class StudentLoginCheck implements HandlerInterceptor{
 		}else if(rolesId!=null){
 			Student student=studentDaoImpl.getStudentById(Integer.parseInt(rolesId));
 			session.setAttribute("student", student);
+			session.setAttribute("roles", "student");
 			return true;
 		}
 		response.sendRedirect("../../login");

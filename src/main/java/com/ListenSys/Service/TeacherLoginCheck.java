@@ -57,6 +57,7 @@ public class TeacherLoginCheck implements HandlerInterceptor{
 		}else if(rolesId!=null){
 			Teacher teacher=teacherDaoImpl.getTeacherById(Integer.parseInt(rolesId));
 			session.setAttribute("teacher", teacher);
+			session.setAttribute("roles", "teacher");
 			return true;
 		}
 		response.sendRedirect("../../login");
