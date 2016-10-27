@@ -35,9 +35,8 @@ public class StudentRecordUploadController {
 		return "student/stu_recordUpload";
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public String recordUpload(@PathVariable String studentId,@RequestParam(value="record") MultipartFile record,
+	public String recordUpload(@PathVariable String studentId,@RequestParam(value="record",required=true) MultipartFile record,
 			HttpServletRequest request,HttpSession session,RedirectAttributes redirectAttributes){
-		//TODO 登陆验证
 		Student student=(Student)session.getAttribute("student");
 		String folderId=request.getParameter("folder");
 		if(folderId==null){
@@ -56,6 +55,26 @@ public class StudentRecordUploadController {
 			return "redirect:recordUpload";
 		}
 		String path = request.getSession().getServletContext().getRealPath("/stu_record");
+		StringBuilder sb=new StringBuilder();
+		sb.append(student.getStudentId());
+		sb.append("+").append(folderId).append("+");
+		sb.append(record.getOriginalFilename());
+		//修改 将存文件操作移除成单个函数
+		if(!saveFile(record, sb.toString(), path)){
+			redirectAttributes.addFlashAttribute("error","服务器原因，文件上传失败");
+			return "redirect:recordUpload";
+		}
+		Sound sound=new Sound();
+		sound.setStudentId(student.getId());
+		sound.setFolderId(Integer.valueOf(folderId));
+		sb.insert(0, "\\").insert(0, path);//更改了sb，增长前缀，为了储存时加入文件路径
+		sound.setPath(sb.toString());
+		if(!soundDaoImpl.addSound(sound)){
+			redirectAttributes.addFlashAttribute("error","服务器原因，文件上传失败");
+			return "redirect:recordUpload";
+		}
+		return "student/stu_recordUpload";
+		/*
 		StringBuilder sb=new StringBuilder();
 		sb.append(student.getStudentId());
 		sb.append("+").append(folderId).append("+");
@@ -82,7 +101,11 @@ public class StudentRecordUploadController {
 			return "redirect:recordUpload";
 		}
 		return "student/stu_recordUpload";
+		*/
 	}
+	/**
+	 * 判断上传文件是不是音频文件
+	 */
 	private boolean isAudio(String name){
 		String [] str=name.split("\\.");
 		String suffix=str[str.length-1];
@@ -90,4 +113,26 @@ public class StudentRecordUploadController {
 		if(suffix.matches(AUDIO)) return true;
 		else return false;
 	}
+	/**
+	 * 为上面存record服务的文件储存函数
+	 * @param record 音频文件
+	 * @param fileName 文件储存的文件名
+	 * @param path 文件储存的路径
+	 * @return boolean表示是否储存成功
+	 */
+	private boolean saveFile(MultipartFile record,String fileName,String path){
+        File targetFile = new File(path, fileName);
+        if(!targetFile.exists()){
+            targetFile.mkdirs();
+        }
+		try {
+			record.transferTo(targetFile);
+		} catch (IllegalStateException | IOException e) {
+			//TODO 加入日志
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 }

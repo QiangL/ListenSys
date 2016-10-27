@@ -85,19 +85,15 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public boolean addSound(Sound sound) {
-		String sql="insert into sound (student_id,folder_id,points,comment,marked,path) values(?,?,?,?,0,?,)";
+		String sql="insert into sound (student_id,folder_id,points,marked,path) values(?,?,0,0,?)";
 		Object[] args=new Object[]{
 				sound.getStudentId(),
 				sound.getFolderId(),
-				sound.getPoints(),
-				sound.getComment(),
 				sound.getPath()
 		};
 		int[] argTypes=new int[]{
 				Types.INTEGER,
 				Types.INTEGER,
-				Types.INTEGER,
-				Types.VARCHAR,
 				Types.VARCHAR
 		};
 		return jdbcTemplate.update(sql,args,argTypes)==1?true:false;
