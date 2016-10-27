@@ -13,7 +13,7 @@ public class CookieUtil {
 	public static String getCookieValue(String cookieName,Cookie []cookies){
 		String cookieValue=null;
 		for(Cookie c:cookies){
-			if(c.getName().equals("cookieName")){
+			if(c.getName().equals(cookieName)){
 				cookieValue=c.getValue();
 			}
 		}
@@ -27,7 +27,7 @@ public class CookieUtil {
 	 */
 	public static void removeCookie(String cookieName,Cookie[]cookies,HttpServletResponse response){
 		for(Cookie c:cookies){
-			if(c.getName().equals("cookieName")){
+			if(c.getName().equals(cookieName)){
 				c.setMaxAge(0);
 				c.setPath("/ListenSys/");
 				response.addCookie(c);

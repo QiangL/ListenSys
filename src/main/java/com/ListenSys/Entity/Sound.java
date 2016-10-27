@@ -6,6 +6,8 @@ public class Sound {
 	private int points;
 	private String comment;
 	private boolean marked;
+	private String name;
+	
 	
 	private int studentId;
 	private int folderId;
@@ -29,6 +31,12 @@ public class Sound {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getPath() {
 		return path;

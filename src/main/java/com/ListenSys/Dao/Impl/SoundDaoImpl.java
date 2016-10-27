@@ -35,6 +35,7 @@ public class SoundDaoImpl implements SoundDao {
 				sound.setPoints(rs.getInt("points"));
 				sound.setMarked(rs.getInt("marked")==1?true:false);
 				sound.setPath(rs.getString("path"));
+				sound.setName(rs.getString("name"));
 				sound.setComment(rs.getString("comment"));
 			}
 		});
@@ -55,6 +56,7 @@ public class SoundDaoImpl implements SoundDao {
 				sound.setPoints(rs.getInt("points"));
 				sound.setMarked(rs.getInt("marked")==1?true:false);
 				sound.setPath(rs.getString("path"));
+				sound.setName(rs.getString("name"));
 				sound.setComment(rs.getString("comment"));
 				return sound;
 			}
@@ -76,6 +78,7 @@ public class SoundDaoImpl implements SoundDao {
 				sound.setPoints(rs.getInt("points"));
 				sound.setMarked(rs.getInt("marked")==1?true:false);
 				sound.setPath(rs.getString("path"));
+				sound.setName(rs.getString("name"));
 				sound.setComment(rs.getString("comment"));
 				return sound;
 			}
@@ -85,15 +88,17 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public boolean addSound(Sound sound) {
-		String sql="insert into sound (student_id,folder_id,points,marked,path) values(?,?,0,0,?)";
+		String sql="insert into sound (student_id,folder_id,points,marked,path,name) values(?,?,0,0,?,?)";
 		Object[] args=new Object[]{
 				sound.getStudentId(),
 				sound.getFolderId(),
-				sound.getPath()
+				sound.getPath(),
+				sound.getName()
 		};
 		int[] argTypes=new int[]{
 				Types.INTEGER,
 				Types.INTEGER,
+				Types.VARCHAR,
 				Types.VARCHAR
 		};
 		return jdbcTemplate.update(sql,args,argTypes)==1?true:false;
@@ -107,7 +112,7 @@ public class SoundDaoImpl implements SoundDao {
 
 	@Override
 	public boolean updateSound(Sound sound) {
-		String sql="update sound set student_id=?,folder_id=?,marked=?,comment=?,path=?,points=?  where sound_id=?";
+		String sql="update sound set student_id=?,folder_id=?,marked=?,comment=?,path=?,points=?,name=?  where sound_id=?";
 		Object[] args=new Object[]{
 				sound.getStudentId(),
 				sound.getFolderId(),
@@ -115,6 +120,7 @@ public class SoundDaoImpl implements SoundDao {
 				sound.getComment(),
 				sound.getPath(),
 				sound.getPoints(),
+				sound.getName(),
 				sound.getId()
 		};
 		int[] argTypes=new int[]{
@@ -124,6 +130,7 @@ public class SoundDaoImpl implements SoundDao {
 				Types.VARCHAR,
 				Types.VARCHAR,
 				Types.INTEGER,
+				Types.VARCHAR,
 				Types.INTEGER
 		};
 		return jdbcTemplate.update(sql,args,argTypes)==1?true:false;
@@ -146,6 +153,7 @@ public class SoundDaoImpl implements SoundDao {
 				sound.setPoints(rs.getInt("points"));
 				sound.setMarked(rs.getInt("marked")==1?true:false);
 				sound.setPath(rs.getString("path"));
+				sound.setName(rs.getString("name"));
 				sound.setComment(rs.getString("comment"));
 				return sound;
 			}

@@ -67,6 +67,7 @@ public class StudentRecordUploadController {
 		Sound sound=new Sound();
 		sound.setStudentId(student.getId());
 		sound.setFolderId(Integer.valueOf(folderId));
+		sound.setName(record.getOriginalFilename());
 		sb.insert(0, "\\").insert(0, path);//更改了sb，增长前缀，为了储存时加入文件路径
 		sound.setPath(sb.toString());
 		if(!soundDaoImpl.addSound(sound)){

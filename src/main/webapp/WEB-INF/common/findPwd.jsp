@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 	<%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -26,6 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<legend>找回密码</legend>
 				</div>
 			</div>
+			<c:if test="${not empty error }">
+			<div class="alert  alert-danger text-center col-sm-8 col-sm-offset-2" role="alert">
+			 ${error }
+			</div>
+			</c:if>
 			<div class="form-group">
 				<label for="userID" class="col-sm-3 control-label">用户名：</label>
 				<div class="col-sm-6">

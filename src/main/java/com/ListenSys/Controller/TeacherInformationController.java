@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ListenSys.Dao.Impl.TeacherDaoImpl;
 import com.ListenSys.Entity.Teacher;
@@ -26,22 +27,22 @@ public class TeacherInformationController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String checkInformation(@PathVariable String teacherId, Teacher s,
-			String password2, String passwordComfir, ModelMap modelMap,
+			String password2, String passwordComfir, RedirectAttributes redirectAttributes,
 			HttpSession session) {
 		Teacher teacher = (Teacher) session.getAttribute("teacher");
 		if (!teacher.getTeacherPwd().equals(s.getTeacherPwd())) {
-			modelMap.put("error", "原始密码错误");
+			redirectAttributes.addFlashAttribute("error", "原始密码错误");
 			return "redirect:information";
 		}
 		if (!password2.equals(passwordComfir)) {
-			modelMap.put("error", "两次更改的密码不一致");
+			redirectAttributes.addFlashAttribute("error", "两次更改的密码不一致");
 			return "redirect:information";
 		}
 		if (!password2.equals("")) {// TODO验证密码格式
 			if (password2.matches("^[a-zA-Z]\\w{5,17}$")) {
 				teacher.setTeacherPwd(password2);
 			} else {
-				modelMap.put("error", "新密码格式不正确");
+				redirectAttributes.addFlashAttribute("error", "新密码格式不正确");
 				return "redirect:information";
 			}
 
@@ -50,12 +51,12 @@ public class TeacherInformationController {
 		teacher.setTeacherName(s.getTeacherName());
 
 		if (!teacherDapImpl.updateTeacher(teacher)) {
-			modelMap.put("error", "修改失败");
+			redirectAttributes.addFlashAttribute("error", "修改失败");
 			return "redirect:information";
 		}
 		session.removeAttribute("teacher");
 		session.setAttribute("teacher", teacher);
-		modelMap.put("success", "修改成功");
+		redirectAttributes.addFlashAttribute("success", "修改成功");
 		return "teacher/tea_userCenter";
 	}
 }

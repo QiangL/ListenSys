@@ -48,6 +48,12 @@
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>4.1.6.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>1.8.9</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
 		<dependency>
 		    <groupId>org.springframework</groupId>

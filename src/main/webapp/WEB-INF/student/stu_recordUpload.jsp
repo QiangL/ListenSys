@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -26,7 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 				<legend>录音上传</legend>
 			</div>
-
+			<c:if test="${not empty error }">
+			<div class="alert  alert-danger text-center col-sm-8 col-sm-offset-2" role="alert">
+			 ${error }
+			</div>
+			</c:if>
 			<div class="form-group">
 				<label for="record" class="control-label col-sm-3">选择录音文件：</label>
 				<div class="col-sm-2">
