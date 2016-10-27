@@ -11,10 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ListenSys.Dao.Impl.StudentDaoImpl;
 import com.ListenSys.Entity.Student;
-<<<<<<< HEAD
-=======
 import com.ListenSys.util.CookieUtil;
->>>>>>> dev
 
 public class StudentLoginCheck implements HandlerInterceptor{
 	@Autowired
@@ -29,25 +26,9 @@ public class StudentLoginCheck implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object studentId) throws Exception {
-<<<<<<< HEAD
-		String rolesId=null;
-		Cookie [] cookies=request.getCookies();
-		if(cookies!=null){
-			for(Cookie cookie :cookies){
-				if(cookie.getName().equals("student")){
-					rolesId=cookie.getValue();
-				}else if(cookie.getName().equals("teacher")){
-					cookie.setMaxAge(0);
-					cookie.setPath("/ListenSys/");
-					response.addCookie(cookie);
-				}
-			}
-		}
-=======
 		Cookie[] cookies=request.getCookies();
 		String rolesId=CookieUtil.getCookieValue("student", cookies);
 		CookieUtil.removeCookie("teacher", cookies, response);
->>>>>>> dev
 		HttpSession session=request.getSession();
 		String sessionRoles=(String)session.getAttribute("roles");
 		if(sessionRoles!=null){//只有一种情况return true，所以嵌套起来写
@@ -72,10 +53,6 @@ public class StudentLoginCheck implements HandlerInterceptor{
 		response.sendRedirect("../../login");
 		return false;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 	@Override
 	public void afterCompletion(HttpServletRequest arg0,
 			HttpServletResponse arg1, Object arg2, Exception arg3)

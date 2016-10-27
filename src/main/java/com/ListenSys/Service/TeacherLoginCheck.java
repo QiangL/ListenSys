@@ -11,10 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ListenSys.Dao.Impl.TeacherDaoImpl;
 import com.ListenSys.Entity.Teacher;
-<<<<<<< HEAD
-=======
 import com.ListenSys.util.CookieUtil;
->>>>>>> dev
 
 public class TeacherLoginCheck implements HandlerInterceptor{
 
@@ -31,23 +28,8 @@ public class TeacherLoginCheck implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object arg2) throws Exception {
 		Cookie [] cookies=request.getCookies();
-<<<<<<< HEAD
-		String rolesId=null;
-		if(cookies!=null){
-			for(Cookie cookie:cookies){
-				if(cookie.getName().equals("teacher")){
-					rolesId=cookie.getValue();
-				}else if(cookie.getName().equals("student")){
-					cookie.setMaxAge(0);
-					cookie.setPath("/ListenSys/");
-					response.addCookie(cookie);
-				}
-			}
-		}
-=======
 		String rolesId=CookieUtil.getCookieValue("teacher", cookies);
 		CookieUtil.removeCookie("student", cookies, response);
->>>>>>> dev
 		HttpSession session=request.getSession();
 		String roles=(String)session.getAttribute("roles");
 		if(roles!=null){//只有一种情况return true，所以嵌套起来写
@@ -66,11 +48,7 @@ public class TeacherLoginCheck implements HandlerInterceptor{
 		}else if(rolesId!=null){
 			Teacher teacher=teacherDaoImpl.getTeacherById(Integer.parseInt(rolesId));
 			session.setAttribute("teacher", teacher);
-<<<<<<< HEAD
-			session.setAttribute("roles","teacher");
-=======
 			session.setAttribute("roles", "teacher");
->>>>>>> dev
 			return true;
 		}
 		response.sendRedirect("../../login");
