@@ -55,7 +55,7 @@ public class StudentInformationController {
 		session.removeAttribute("student");
 		session.setAttribute("student", student);
 		redirectAttributes.addFlashAttribute("success","修改成功");
-		return "student/stu_userCenter";
+		return "redirect:information";
 	}
 
 }

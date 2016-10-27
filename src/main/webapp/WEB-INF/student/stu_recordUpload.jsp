@@ -32,6 +32,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 ${error }
 			</div>
 			</c:if>
+			<c:if test="${not empty success }">
+			<div class="alert  alert-success text-center col-sm-8 col-sm-offset-2" role="alert">
+			 ${success }
+			</div>
+			</c:if>
 			<div class="form-group">
 				<label for="record" class="control-label col-sm-3">选择录音文件：</label>
 				<div class="col-sm-2">

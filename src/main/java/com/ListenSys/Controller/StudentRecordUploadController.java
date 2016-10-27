@@ -74,7 +74,8 @@ public class StudentRecordUploadController {
 			redirectAttributes.addFlashAttribute("error","服务器原因，文件上传失败");
 			return "redirect:recordUpload";
 		}
-		return "student/stu_recordUpload";
+		redirectAttributes.addFlashAttribute("success","上传音频成功");
+		return "redirect:recordUpload";
 		/*
 		StringBuilder sb=new StringBuilder();
 		sb.append(student.getStudentId());

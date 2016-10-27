@@ -48,7 +48,7 @@ public class ClassesDaoImplTest {
 	public void testAddClasses() {
 		Classes cls=new Classes();
 		cls.setClassId("1411405");
-		cls.setClassName("�� �Ҷ���һ����");
+		cls.setClassName("test");
 		cls.setTeacherId(1);
 		
 		assertEquals(true, testClassesDaoImpl.addClasses(cls));

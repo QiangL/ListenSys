@@ -57,6 +57,6 @@ public class TeacherInformationController {
 		session.removeAttribute("teacher");
 		session.setAttribute("teacher", teacher);
 		redirectAttributes.addFlashAttribute("success", "修改成功");
-		return "teacher/tea_userCenter";
+		return "redirect:information";
 	}
 }

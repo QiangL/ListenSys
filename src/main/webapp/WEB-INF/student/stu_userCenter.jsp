@@ -33,6 +33,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 ${error }
 			</div>
 			</c:if>
+			<c:if test="${not empty success }">
+			<div class="alert  alert-success text-center col-sm-8 col-sm-offset-2" role="alert">
+			 ${success }
+			</div>
+			</c:if>
 			<div class="form-group">
 				<label for="studentId" class="col-sm-3 control-label">用户名：</label>
 				<div class="col-sm-6">

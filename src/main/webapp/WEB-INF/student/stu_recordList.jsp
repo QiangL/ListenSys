@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 </head>
 <body class="container-fluid">
 
@@ -39,8 +40,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<c:forEach items="${recordMap}" var="record">
 				<c:forEach items="${record.value }" var="sound">
 					<tr>
-					<td>${record.key.getFolderName() }</td>
-					<td>${sound.getName() }</td>
+					<td name="folderName" data-folderId="${record.key.getId() }">${record.key.getFolderName() }</td>
+					<td name="soundName" data-soundId="${sound.getId() }">${sound.getName() }</td>
 					<td>${sound.getPoints() }</td>
 				</tr>
 				</c:forEach>
@@ -56,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 
 	<!-- 录音列表 -->
-	<div class="recordDetail">
+	<div class="noneDisplay">
 		<ul class="media-list">
 			<!-- 文件夹列表-->
 			<li class="media">
