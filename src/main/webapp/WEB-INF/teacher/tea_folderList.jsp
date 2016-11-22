@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-	<%
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -23,13 +24,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		img {
 			border: 0;
 		}
-		
 		a,
 		a:hover {
 			color: #000;
 			text-decoration: none;
 		}
-		
 		.left {
 			width: 200px;
 			height: 100%;
@@ -39,13 +38,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			left: 0;
 			top: 0;
 		}
-		
 		.div1 {
 			text-align: center;
 			width: 200wpx;
 			padding-top: 10px;
 		}
-		
 		.div2 {
 			height: 40px;
 			line-height: 40px;
@@ -54,7 +51,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			position: relative;
 			border-bottom: #ccc 1px dotted;
 		}
-		
 		.sliderTitle {
 			position: absolute;
 			height: 20px;
@@ -62,17 +58,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			top: 10px;
 			background: url(images/1.png);
 		}
-		
 		.div3 {
 			display: none;
 			font-size: 13px;
 		}
-		
 		.div3 ul {
 			margin: 0;
 			padding: 0;
 		}
-		
 		.div3 li {
 			height: 30px;
 			line-height: 30px;
@@ -130,24 +123,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<%@include file="tea_nav.jsp" %>
 		<!--文件夹列表 -->
 		<!-- 希望变成侧边栏 -->
-		<div class="left col-sm-3 contain">
+		<div class="left col-sm-2 contain">
+		
 			<div class="div1">
+			<c:forEach items="${folderList }" var="folder">
 				<div class="div2">
-					<div class="sliderTitle">文件夹</div>
+					<div class="sliderTitle" data-folderId="${folder.getId() }" }>${folder.getFolderName() }</div>
 				</div>
 				<div class="div3">
 					<ul>
-						<li>this is a test</li>
-						<li>this is a test</li>
-						<li>this is a test</li>
+					<c:forEach items="${classesList }" var="cla">
+					<li data-classesId="${cla.getId() }">${cla.getClassName() }</li>
+					</c:forEach>
 					</ul>
 				</div>
-				
+				</c:forEach>
 			</div>
+		
 		</div>
 		<!-- 班级中每个人的录音 -->
 
-		<div class="panel panel-default col-sm-9 contain">
+		<div class="panel panel-default col-sm-10 pull-right contain">
 			<div class="panel-heading">
 				某班某文件夹录音
 				<span class="pull-right">顺序播放</span>
