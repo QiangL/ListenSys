@@ -4,4 +4,4 @@ CREATE TABLE `folder` (
   `folderName` varchar(100) CHARACTER SET utf8 NOT NULL,
   `description` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`folder_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

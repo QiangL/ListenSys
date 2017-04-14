@@ -3,4 +3,5 @@
 // 这里是我在测试git的vim功能，尝试保存
 
 > 2017.2.24 工程目的与[japanese-OES](https://github.com/QiangL/japanese-OES) 一致，而且走偏了，遂废弃
+> 主要精力改为修复[japanese-OES](https://github.com/QiangL/japanese-OES)的若干bug,和修正一些功能
 

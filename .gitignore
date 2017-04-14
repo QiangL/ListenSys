@@ -1,5 +1,4 @@
 /target/
-/SQL/
 *.class
  
 # Package Files #
@@ -13,5 +12,6 @@ target
 # ignore eclipse files
 .project
 .classpath
+/.classpath
 .settings
 .metadata

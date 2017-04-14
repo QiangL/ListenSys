@@ -6,5 +6,6 @@ CREATE TABLE `student` (
   `email` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
   `classes_id` int(11) NOT NULL,
   PRIMARY KEY (`student_id`),
+  UNIQUE KEY `studentId` (`studentId`),
   KEY `classes_id_idx` (`classes_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
